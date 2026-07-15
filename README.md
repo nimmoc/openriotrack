@@ -1,5 +1,7 @@
 # OpenRioTrack
 
+[English](README_EN.md) | 简体中文
+
 OpenRioTrack 是一款由 **nimmoc** 发起的 Rio 800 开源桌面管理工具，让这款早期 USB 音乐播放器可以直接连接现代 macOS。
 
 ![OpenRioTrack 1.0](docs/openriotrack.png)
