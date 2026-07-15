@@ -1,0 +1,13 @@
+.DS_Store
+node_modules/
+dist/
+test-results/
+*.log
+npm-debug.log*
+.env
+.env.*
+!.env.example
+
+native/rioutil/build/
+native/rioutil/build-*/
+native/rioutil/*.dSYM/

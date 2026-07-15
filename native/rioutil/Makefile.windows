@@ -1,0 +1,52 @@
+ZIG ?= zig
+TARGET ?= x86_64-windows-gnu
+BUILD_DIR ?= build-windows
+LIBUSB_SRC ?= $(BUILD_DIR)/libusb-win-src
+OUTPUT ?= $(BUILD_DIR)/rioutil.exe
+
+CPPFLAGS := -Iinclude -I$(LIBUSB_SRC) -I$(LIBUSB_SRC)/libusb
+CPPFLAGS += -DPACKAGE=\"rioutil\" -DVERSION=\"1.5.4-rio800.1\"
+CFLAGS := -target $(TARGET) -O2 -std=gnu99 -Wall -Wextra
+CFLAGS += -Wno-macro-redefined -Wno-cast-function-type-mismatch
+
+LIBRIO_SOURCES := \
+	librioutil/rio.c \
+	librioutil/rioio.c \
+	librioutil/mp3.c \
+	librioutil/downloadable.c \
+	librioutil/byteorder.c \
+	librioutil/song_management.c \
+	librioutil/cksum.c \
+	librioutil/util.c \
+	librioutil/log.c \
+	librioutil/playlist_file.c \
+	librioutil/playlist.c \
+	librioutil/id3.c \
+	librioutil/driver_libusb.c \
+	librioutil/file_list.c
+
+LIBUSB_SOURCES := \
+	$(LIBUSB_SRC)/libusb/core.c \
+	$(LIBUSB_SRC)/libusb/descriptor.c \
+	$(LIBUSB_SRC)/libusb/hotplug.c \
+	$(LIBUSB_SRC)/libusb/io.c \
+	$(LIBUSB_SRC)/libusb/strerror.c \
+	$(LIBUSB_SRC)/libusb/sync.c \
+	$(LIBUSB_SRC)/libusb/os/events_windows.c \
+	$(LIBUSB_SRC)/libusb/os/threads_windows.c \
+	$(LIBUSB_SRC)/libusb/os/windows_common.c \
+	$(LIBUSB_SRC)/libusb/os/windows_usbdk.c \
+	$(LIBUSB_SRC)/libusb/os/windows_winusb.c
+
+PLATFORM_SOURCES := librioutil/rio800_font_windows.c
+
+.PHONY: all clean
+
+all: $(OUTPUT)
+
+$(OUTPUT): src/main.c $(LIBRIO_SOURCES) $(LIBUSB_SOURCES) $(PLATFORM_SOURCES)
+	@mkdir -p $(BUILD_DIR)
+	$(ZIG) cc $(CPPFLAGS) $(CFLAGS) src/main.c $(LIBRIO_SOURCES) $(LIBUSB_SOURCES) $(PLATFORM_SOURCES) -static -lgdi32 -o $@
+
+clean:
+	rm -f $(OUTPUT)

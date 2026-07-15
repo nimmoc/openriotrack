@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:;" />
+    <title>OpenRioTrack</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="titlebar">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">ORT</div>
+          <div>
+            <h1>OpenRioTrack</h1>
+            <p id="connectionLabel">正在检查设备</p>
+          </div>
+        </div>
+        <div class="titlebar-actions">
+          <button id="driverButton" class="button button-quiet is-hidden" type="button">
+            <i data-lucide="shield-check" aria-hidden="true"></i>
+            Windows 驱动
+          </button>
+          <button id="refreshButton" class="icon-button" type="button" title="刷新设备" aria-label="刷新设备">
+            <i data-lucide="refresh-cw" aria-hidden="true"></i>
+          </button>
+        </div>
+      </header>
+
+      <main>
+        <section class="device-strip" aria-labelledby="deviceTitle">
+          <div class="device-identity">
+            <div id="deviceGlyph" class="device-glyph" aria-hidden="true">
+              <i data-lucide="audio-lines"></i>
+            </div>
+            <div>
+              <div class="status-line">
+                <span id="statusDot" class="status-dot status-loading"></span>
+                <span id="deviceTitle">正在连接</span>
+              </div>
+              <p id="deviceMeta">正在读取 Rio 800 信息</p>
+            </div>
+          </div>
+
+          <div class="capacity-block" id="capacityBlock" aria-label="设备容量">
+            <div class="capacity-copy">
+              <span id="capacityLabel">总容量（内部 + 扩展卡）</span>
+              <strong id="capacityText">--</strong>
+            </div>
+            <div class="capacity-track" aria-hidden="true"><span id="capacityBar"></span></div>
+          </div>
+        </section>
+
+        <section class="library-section" aria-labelledby="libraryTitle">
+          <div class="toolbar">
+            <div class="toolbar-heading">
+              <h2 id="libraryTitle">设备音乐</h2>
+              <span id="trackCount">0 首</span>
+              <span id="selectionSummary" class="selection-summary is-hidden"></span>
+            </div>
+            <div class="toolbar-actions">
+              <label class="search-field" for="searchInput">
+                <i data-lucide="search" aria-hidden="true"></i>
+                <input id="searchInput" type="search" placeholder="搜索歌曲" autocomplete="off" />
+              </label>
+              <select id="memorySelect" aria-label="查看和传输目标存储" title="查看和传输目标存储" disabled>
+                <option value="0">内部存储</option>
+              </select>
+              <button id="deleteButton" class="icon-button danger" type="button" title="删除所选歌曲" aria-label="删除所选歌曲" disabled>
+                <i data-lucide="trash-2" aria-hidden="true"></i>
+              </button>
+              <button id="addButton" class="button button-primary" type="button" disabled>
+                <i data-lucide="plus" aria-hidden="true"></i>
+                添加音乐
+              </button>
+            </div>
+          </div>
+
+          <div id="contentState" class="content-state loading-state" aria-live="polite">
+            <div class="spinner" aria-hidden="true"></div>
+            <strong>正在读取设备</strong>
+            <span>这通常只需要几秒钟</span>
+          </div>
+
+          <div id="tableWrap" class="table-wrap is-hidden">
+            <table>
+              <thead>
+                <tr>
+                  <th class="select-column"><input id="selectAll" type="checkbox" aria-label="选择全部歌曲" /></th>
+                  <th>歌曲</th>
+                  <th>艺人</th>
+                  <th>专辑</th>
+                  <th>时长</th>
+                  <th>大小</th>
+                  <th>存储</th>
+                </tr>
+              </thead>
+              <tbody id="trackRows"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+
+      <footer class="statusbar">
+        <span id="footerStatus">准备就绪</span>
+        <span id="platformLabel"></span>
+      </footer>
+    </div>
+
+    <div id="progressPanel" class="progress-panel is-hidden" role="status" aria-live="polite">
+      <div class="progress-copy">
+        <strong id="progressTitle">正在传输</strong>
+        <span id="progressDetail"></span>
+      </div>
+      <div class="progress-track"><span id="progressBar"></span></div>
+      <button id="cancelButton" class="icon-button" type="button" title="取消任务" aria-label="取消任务">
+        <i data-lucide="x" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div id="dropOverlay" class="drop-overlay" aria-hidden="true">
+      <div class="drop-prompt">
+        <i data-lucide="file-down" aria-hidden="true"></i>
+        <strong id="dropTarget">添加到内部存储</strong>
+        <span>松开即可传输音乐</span>
+      </div>
+    </div>
+
+    <dialog id="confirmDialog">
+      <form method="dialog">
+        <div class="dialog-icon" aria-hidden="true"><i data-lucide="trash-2"></i></div>
+        <h2>删除所选歌曲？</h2>
+        <p id="confirmText">删除后无法从设备中恢复。</p>
+        <div class="dialog-actions">
+          <button class="button button-quiet" value="cancel">取消</button>
+          <button id="confirmDeleteButton" class="button button-danger" value="confirm">删除</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="../node_modules/lucide/dist/umd/lucide.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

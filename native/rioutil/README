@@ -1,0 +1,87 @@
+rioutil Supported Players:
+ - Rio 600 (all sizes)
+ - Rio 800 (all sizes)
+ - Rio 900 (all sizes)
+ - Nike psa[play (Diamond MM version)
+ - Rio S-Series (firmware update works. remember to run rioutil -m 0 -f after upgrading)
+ - Rio Fuse/Chiba/Cali 
+ - Rio Nitrus (mostly works)
+
+no download support:
+ - Rio Riot
+ - Future flash players ... (REALLY EXPERIMENTAL)
+
+-- All players' memory expansion should work through -m option --
+
+Unsupported Rio players:
+Rio 500 - please try rio500.sf.net.
+Rio One - mount as fat filesystem.
+Rio Karma - unknown
+Phillips psa[play - unknown
+
+If you have any questions, comments, or patches please email:
+hjelmn at users dot sourceforge dot net
+
+rioutil is free software released under the terms of the LGPL (read LICENCE file).
+
+******************************************************************************
+** building                                                                 **
+******************************************************************************
+# if using a svn checkout this extra line is needed
+% ./autogen.pl
+
+% configure
+% make
+% make install
+
+******************************************************************************
+** building package                                                         **
+******************************************************************************
+debian:
+% dpkg-buildpackage
+
+redhat:
+% ./configure [options]
+% make dist
+% cp rioutil-{VERSION}.tar.gz {RPM SOURCE DIRECTORY}
+% cd spec
+% rpmbuild -bb rioutil.spec
+
+*** NOTES **
+ - libusb is now the only availabke driver so you no longer need to specify an
+   option to use libusb.
+ - For darwin 5.x, 6.x or macos 10.x.x you will want libusb-1.0 1.0.9 or newer.
+
+******************************************************************************
+** firmware notes                                                           **
+******************************************************************************
+
+If you want firmware updates, please do not email me. I dont know
+the legal issues with mirroring them, so if you want to get a hold of
+one and can use stuffit expander (www.aladdinsys.com), you can download
+the firmware designed for the mac from www.riohome.com (a .sit.hqx or .zip file).
+Once this file is decompressed you should have a .lok file, this is the firmware.
+
+www.riohome.com is no longer available. Firmware updates can probably be found
+by searching the web. Below are the latest known versions for various players.
+
+08/30/2006: Current firmware versions:
+rio600   : 1.56
+rio600-64: 1.56
+rio800   : 1.55
+Riot     : 1.25
+psa[play : 1.62
+
+These players work with rioutil's firmware update only from the ready to recieve
+firmware screen. A future version of rioutil will fix this known issue.
+S-Series : 2.03
+Fuse     : 1.12
+Cali     : 2.43
+Chiba    : 2.43
+
+As far as I know, if you have any other player you probably have the latest
+firmware version (if it was bought recently).
+
+enjoy!
+
+-Nathan Hjelm

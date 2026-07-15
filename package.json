@@ -1,0 +1,76 @@
+{
+  "name": "openriotrack",
+  "version": "1.0.0",
+  "description": "An open-source desktop manager for the Rio 800 audio player",
+  "main": "main.js",
+  "license": "GPL-2.0-or-later",
+  "author": "nimmoc",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nimmoc/openriotrack.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nimmoc/openriotrack/issues"
+  },
+  "homepage": "https://github.com/nimmoc/openriotrack#readme",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test tests/*.test.js",
+    "test:ui": "node tests/electron.e2e.js",
+    "pack:mac": "electron-builder --mac dir --arm64",
+    "pack:win": "electron-builder --win portable --x64"
+  },
+  "dependencies": {
+    "lucide": "^0.468.0"
+  },
+  "devDependencies": {
+    "electron": "^33.2.1",
+    "electron-builder": "^26.15.3",
+    "playwright-core": "^1.49.1"
+  },
+  "build": {
+    "appId": "org.openriotrack.manager",
+    "productName": "OpenRioTrack",
+    "asar": true,
+    "files": [
+      "main.js",
+      "preload.js",
+      "lib/**/*",
+      "renderer/**/*",
+      "package.json",
+      "node_modules/lucide/dist/umd/lucide.js"
+    ],
+    "extraResources": [
+      {
+        "from": "backend",
+        "to": "backend",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "licenses",
+        "to": "licenses",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "mac": {
+      "icon": "build/icon.icns",
+      "category": "public.app-category.utilities",
+      "target": "dir",
+      "artifactName": "${productName}-${version}-macOS-${arch}.${ext}",
+      "hardenedRuntime": false,
+      "gatekeeperAssess": false
+    },
+    "win": {
+      "icon": "build/icon.ico",
+      "target": "portable",
+      "artifactName": "${productName}-${version}-Windows-${arch}.${ext}"
+    }
+  }
+}

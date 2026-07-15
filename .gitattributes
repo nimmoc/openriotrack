@@ -1,0 +1,9 @@
+*.exe binary
+*.icns binary
+*.ico binary
+*.png binary
+*.tar.bz2 binary
+
+# Preserve upstream formatting and verbatim license text.
+native/rioutil/** -whitespace
+licenses/libusb/COPYING -whitespace

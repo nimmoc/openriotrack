@@ -1,0 +1,43 @@
+CC ?= clang
+BUILD_DIR ?= build
+LIBUSB_PREFIX ?= $(BUILD_DIR)/deps/libusb
+MACOSX_DEPLOYMENT_TARGET ?= 11.0
+TARGET := $(BUILD_DIR)/rioutil
+
+CPPFLAGS += -Iinclude -I$(LIBUSB_PREFIX)/include/libusb-1.0
+CPPFLAGS += -DPACKAGE=\"rioutil\" -DVERSION=\"1.5.4-rio800.1\"
+CPPFLAGS += -DHAVE_LIBGEN_H=1 -DHAVE_BASENAME=1
+CFLAGS ?= -O2
+CFLAGS += -std=gnu99 -Wall -Wextra -mmacosx-version-min=$(MACOSX_DEPLOYMENT_TARGET)
+
+LIBRIO_SOURCES := \
+	librioutil/rio.c \
+	librioutil/rioio.c \
+	librioutil/mp3.c \
+	librioutil/downloadable.c \
+	librioutil/byteorder.c \
+	librioutil/song_management.c \
+	librioutil/cksum.c \
+	librioutil/util.c \
+	librioutil/log.c \
+	librioutil/playlist_file.c \
+	librioutil/playlist.c \
+	librioutil/id3.c \
+	librioutil/driver_libusb.c \
+	librioutil/file_list.c
+
+PLATFORM_SOURCES := librioutil/rio800_font_macos.m
+SOURCES := src/main.c $(LIBRIO_SOURCES) $(PLATFORM_SOURCES)
+LIBUSB_STATIC := $(LIBUSB_PREFIX)/lib/libusb-1.0.a
+FRAMEWORKS := -lobjc -framework AppKit -framework IOKit -framework CoreFoundation -framework Security
+
+.PHONY: all clean
+
+all: $(TARGET)
+
+$(TARGET): $(SOURCES) $(LIBUSB_STATIC)
+	@mkdir -p $(BUILD_DIR)
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(SOURCES) $(LIBUSB_STATIC) $(FRAMEWORKS) -o $@
+
+clean:
+	rm -f $(TARGET)
