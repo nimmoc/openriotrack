@@ -68,9 +68,3 @@ npm run pack:mac
 OpenRioTrack 的 Rio USB 协议后端基于 Nathan Hjelm 及贡献者维护的 [hjelmn/rioutil](https://github.com/hjelmn/rioutil)，并在其提交 `100860355caa921f2834e75284e1c04ca6cb1dcb` 基础上完成现代 macOS、Rio 800 中文标题和图形界面所需的适配。修改后的完整源码保存在 `native/rioutil`，原作者信息、版权头和历史文件均予以保留。
 
 项目还使用了 [libusb](https://github.com/libusb/libusb)、[Lucide](https://github.com/lucide-icons/lucide) 和 [Electron](https://github.com/electron/electron)。详情见 [第三方声明](licenses/THIRD_PARTY_NOTICES.md)。
-
-## 许可证与商标
-
-OpenRioTrack 图形程序及 `rioutil` 命令行程序按 GPL-2.0-or-later 发布；`librioutil`、libusb 和其他第三方组件继续适用各自的许可证。完整文本见 [LICENSE](LICENSE) 和 `licenses` 目录。
-
-OpenRioTrack 是独立社区项目，与 Diamond Multimedia、Rio Audio、Digital Networks North America、D&M Holdings 及其继承公司不存在隶属、授权或背书关系。`Rio` 和 `Rio 800` 仅用于说明兼容设备，详见 [商标声明](licenses/TRADEMARKS.md)。
