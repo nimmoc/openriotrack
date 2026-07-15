@@ -69,4 +69,6 @@ npm run pack:mac
 
 OpenRioTrack 的 Rio USB 协议后端基于 Nathan Hjelm 及贡献者维护的 [hjelmn/rioutil](https://github.com/hjelmn/rioutil)，并在其提交 `100860355caa921f2834e75284e1c04ca6cb1dcb` 基础上完成现代 macOS、Rio 800 中文标题和图形界面所需的适配。修改后的完整源码保存在 `native/rioutil`，原作者信息、版权头和历史文件均予以保留。
 
+感谢 OpenAI 和 Codex 在 OpenRioTrack 的 macOS 移植、USB 通信调试、界面开发和项目文档整理过程中提供的协助。
+
 项目还使用了 [libusb](https://github.com/libusb/libusb)、[Lucide](https://github.com/lucide-icons/lucide) 和 [Electron](https://github.com/electron/electron)。详情见 [第三方声明](licenses/THIRD_PARTY_NOTICES.md)。

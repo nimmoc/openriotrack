@@ -2,7 +2,7 @@
 
 English | [简体中文](README.md)
 
-OpenRioTrack is an open-source desktop manager for the Rio 800, created by **nimmoc**. It allows this early USB music player to connect directly to a modern Mac.
+OpenRioTrack is an open-source desktop manager for the Rio 800, created by **nimmoc**. It allows this early USB music player to connect directly to the latest versions of macOS.
 
 ![OpenRioTrack 1.0](docs/openriotrack.png)
 
@@ -11,7 +11,7 @@ OpenRioTrack is an open-source desktop manager for the Rio 800, created by **nim
 - **No Windows XP virtual machine required**: Connect a Rio 800 directly to a Mac without launching Windows XP, installing the original software, or manually installing a driver.
 - **More stable device connections**: Improved USB communication and task scheduling reduce disconnections, stalled progress, and interface freezes during music transfers.
 - **Manage tracks from your computer**: View internal storage and expansion cards, browse tracks, add MP3 files, and select or remove tracks stored on the device.
-- **Reliable Chinese and English support**: Recognizes Chinese and English track titles, artists, and albums, with dedicated compatibility handling for displaying Chinese titles on the Rio 800.
+- **Reliable Chinese and English support**: Recognizes Chinese and English track titles and albums, with dedicated compatibility handling for displaying Chinese titles on the Rio 800.
 
 ## Download
 
@@ -68,5 +68,7 @@ The ported `rioutil` source is located in `native/rioutil`. Rebuild the backend 
 ## Acknowledgements
 
 OpenRioTrack's Rio USB protocol backend is based on [hjelmn/rioutil](https://github.com/hjelmn/rioutil), maintained by Nathan Hjelm and its contributors. The port builds on commit `100860355caa921f2834e75284e1c04ca6cb1dcb`, with adaptations for modern macOS, Chinese Rio 800 track titles, and the graphical interface. The complete modified source is included in `native/rioutil`, with the original attribution, copyright headers, and historical files preserved.
+
+Special thanks to OpenAI and Codex for their assistance with OpenRioTrack's macOS port, USB communication debugging, interface development, and project documentation.
 
 This project also uses [libusb](https://github.com/libusb/libusb), [Lucide](https://github.com/lucide-icons/lucide), and [Electron](https://github.com/electron/electron). See [Third-Party Notices](licenses/THIRD_PARTY_NOTICES.md) for details.
